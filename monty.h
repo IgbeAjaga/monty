@@ -53,7 +53,6 @@ void sub(stack_t **stack, unsigned int line_number);
 void div_op(stack_t **stack, unsigned int line_number);
 void mul_op(stack_t **stack, unsigned int line_number);
 void mod_op(stack_t **stack, unsigned int line_number);
-int parse_line(char *line, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
@@ -61,4 +60,6 @@ void rotr(stack_t **stack, unsigned int line_number);
 extern int mode;
 void add_node_top(stack_t **stack, int n);
 void add_node_end(stack_t **stack, int n);
+int parse_line(char *line, stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *stack);
 #endif

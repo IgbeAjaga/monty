@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdlib.h>
 
 /**
  * push - Pushes an element to the stack.
@@ -14,7 +15,7 @@ int mode = MODE_STACK;
 void push(stack_t **stack, int value)
 {
 	stack_t *new_node;
-	stack_t *temp;
+	/* stack_t *temp; */
 	
 	new_node = malloc(sizeof(stack_t));
 
@@ -22,8 +23,8 @@ void push(stack_t **stack, int value)
    {
       fprintf(stderr, "Error: malloc failed\n");
       new_node = new_node->next;
-      free(temp);
-      /*free_stack(*stack);*/
+      /* free(temp); */
+      free_stack(*stack);
       exit(EXIT_FAILURE);
    }
 
