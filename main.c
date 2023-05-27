@@ -1,36 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "monty.h"
+#include <stdio.h>
 
-int main(void)
-{
-   stack_t *stack = NULL;
-   char line[] = "push 5";
-   unsigned int line_number = 1;
+int main(void) {
+    stack_t *stack = NULL;
+    char *line = NULL;
+    size_t line_len = 0;
+    unsigned int line_number = 0;
+    int ret;
 
-   /* Example usage of push() from push.c */
-   printf("Pushing values onto the stack...\n");
-   push(&stack, 5);
-   push(&stack, 10);
+    while (getline(&line, &line_len, stdin) != -1) {
+        line_number++;
+        ret = parse_line(line, line_number, &stack);
+        if (ret == -1) {
+            fprintf(stderr, "Error: Failed to parse line %u\n", line_number);
+            break;
+        }
+    }
 
-   add(&stack, 3);
-
-   /* Example usage of pall() from pall.c */
-   printf("Printing all values in the stack...\n");
-   pall(&stack, 4);
-
-   /* Free the stack memory */
-   free_stack(stack);
-
-   /* Example usage of pop() from pop.c */
-   printf("Popping values from the stack...\n");
-   pop(&stack, 1);
-   pop(&stack, 2);
-
-   /* Example usage of parse_line() from monty.c */
-   printf("Parsing and executing Monty bytecode...\n");
-   parse_line(line, &stack, line_number);
-
-   return 0;
+    free_stack(stack);
+    free(line);
+    return 0;
 }
-
